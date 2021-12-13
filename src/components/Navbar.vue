@@ -8,9 +8,9 @@
 <style lang="scss" scoped>
   .navbar {
     background-color: #fff;
-    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    box-shadow: 0 0 5px $shadowLight;
     display: flex;
-    height: 40px;
+    height: $navbarHeight;
     padding: 0 10px;
     position: fixed;
     width: 100%;
@@ -31,7 +31,7 @@
       }
 
       &:hover {
-        background-color: rgba(0,0,0,0.2);
+        background-color: $shadowLight;
       }
     }
   }
