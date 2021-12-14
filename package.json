@@ -10,7 +10,11 @@
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^31.1.0",
     "@ckeditor/ckeditor5-vue2": "^1.0.5",
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fortawesome/vue-fontawesome": "^2.0.6",
     "core-js": "^3.6.5",
+    "uniqid": "^5.4.0",
     "vue": "^2.6.11",
     "vue-router": "^3.5.3",
     "vuex": "^3.6.2"

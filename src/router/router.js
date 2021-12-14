@@ -8,9 +8,20 @@ import Editor from '../views/Editor';
 Vue.use(VueRouter);
 
 const routes = [
-  { path: '/', component: Dashboard, meta: { title: 'Home' } },
-  { path: '/post', component: BlogPost },
-  { path: '/edit', component: Editor }
+  {
+    path: '/',
+    component: Dashboard,
+    meta: { title: 'Home' }
+  },
+  {
+    path: '/post/:id',
+    name: 'Post',
+    component: BlogPost
+  },
+  {
+    path: '/edit',
+    component: Editor
+  }
 ];
 
 const router = new VueRouter({
