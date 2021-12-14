@@ -15,7 +15,9 @@
         :class="$route.path === '/edit' ? 'hidden' : ''"
         to="/edit"
       >
-        <Button>New Post</Button>
+        <Button>
+          <fa-icon icon="plus" /> New Post
+        </Button>
       </router-link>
       <div
         class="navbar__item"
