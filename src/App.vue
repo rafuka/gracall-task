@@ -7,7 +7,7 @@
 
 <style lang="scss" scoped>
   .main-content {
-    padding: ($navbarHeight + 20px) 30px;
+    padding: ($navbarHeight + $mainContentPadding) $mainContentPadding;
   }
 </style>
 

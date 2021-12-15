@@ -1,49 +1,41 @@
 <template>
   <div class="post-preview">
-    <div
-      class="post-preview__title"
-      :style="post.imgUrl ? `background-image: url(${post.imgUrl})` : ''"
+    <ContextMenu
+      :items="[
+        {
+          name: 'Edit',
+          action: onEdit,
+          icon: 'edit'
+        },
+        {
+          name: 'Delete',
+          action: onDelete,
+          icon: 'trash'
+        }
+      ]"
+    />
+    <router-link
+      :to="{ name: 'Post', params: { id: post.id } }"
+      :key="post.id"
+      class="post-link"
     >
       <div
-        class="post-preview__menu"
-        v-click-outside="closeMenu"
+        class="post-preview__title"
+        :style="post.imgUrl ? `background-image: url(${post.imgUrl})` : ''"
       >
-        <fa-icon
-          icon="ellipsis-v"
-          class="post-preview__menu-btn"
-          @click="toggleMenu"
+        <div
+          v-if="post.imgUrl"
+          class="post-preview__title-overlay"
         />
-        <ul
-          v-if="menuOpen"
-          class="menu-list"
-        >
-          <li
-            class="menu-list__item"
-            @click="onEdit"
-          >
-            <fa-icon icon="edit" /> Edit
-          </li>
-          <li
-            class="menu-list__item"
-            @click="onDelete"
-            id="delete-btn"
-          >
-            <fa-icon icon="trash" /> Delete
-          </li>
-        </ul>
+        <h2 :style="!post.imgUrl ? 'color: #000;' : ''">
+          {{post.title}}
+        </h2>
       </div>
-      <div
-        v-if="post.imgUrl"
-        class="post-preview__title-overlay"
-      />
-      <h2 :style="!post.imgUrl ? 'color: #000;' : ''">
-        {{post.title}}
-      </h2>
-    </div>
-    <div class="post-preview__snippet" ref="snippet">
-      <!-- Post content is injected as HTML -->
-    </div>
-    <div class="post-preview__snippet-overlay" />
+      <div class="post-preview__snippet" ref="snippet">
+        <!-- Post content is injected as HTML -->
+      </div>
+      <div class="post-preview__snippet-overlay" />
+    </router-link>
   </div>
 </template>
 
@@ -64,17 +56,13 @@
     }
 
     &__title {
-      align-items: center;
-      background-position: center center;
-      background-size: cover;
-      background-repeat: no-repeat;
-      display: flex;
-      justify-content: center;
+      @include post-title;
       min-height: 150px;
       position: relative;
 
       h2 {
         color: #fff;
+        font-family: $mainFont;
         font-size: 2rem;
         margin: 5px;
         text-align: center;
@@ -93,6 +81,7 @@
     }
 
     &__snippet {
+      font-family: $postContentFont;
       padding: 10px;
     }
 
@@ -104,60 +93,16 @@
       position: absolute;
       width: 100%;
     }
-
-    &__menu-btn {
-      color: rgba(#000, .7);
-      font-weight: bold;
-      font-size: 25px;
-      opacity: 0;
-      position: absolute;
-      right: 0;
-      top: 8px;
-      width: 25px;
-      z-index: 3;
-
-      .post-preview:hover & {
-        opacity: 1;
-      }
-
-      &:hover {
-        color: $info;
-      }
-    }
   }
 
-  .menu-list {
-    background-color: white;
-    border-radius: 4px;
-    box-shadow: -2px 2px 3px $shadowLight;
-    display: flex;
-    flex-direction: column;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: 3;
-
-    &__item {
-      padding: 10px 20px;
-
-      &:hover {
-        background-color: rgba(#000, .2);
-      }
-
-      &#delete-btn {
-        &:hover {
-          color: $danger;
-        }
-      }
-    }
+  .post-link {
+    text-decoration: none;
+    color: initial;
   }
 </style>
 
 <script>
-// import Vue from 'vue';
+import ContextMenu from './ContextMenu';
 
 export default {
   name: 'PostPreview',
@@ -175,22 +120,12 @@ export default {
       default: () => {}
     }
   },
-  data() {
-    return {
-      menuOpen: false
-    }
-  },
   mounted() {
     const { content } = this.post;
     this.$refs.snippet.innerHTML = content;
   },
-  methods: {
-    toggleMenu() {
-      this.menuOpen = !this.menuOpen
-    },
-    closeMenu() {
-      this.menuOpen = false
-    }
+  components: {
+    ContextMenu
   }
 }
 </script>

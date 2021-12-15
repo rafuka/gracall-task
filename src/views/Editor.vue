@@ -28,6 +28,7 @@
     .input-field {
       border: 1px solid lightgray;
       border-radius: 3px;
+      font-family: $mainFont;
       margin-bottom: 10px;
       outline: none;
       padding: 7px;
@@ -68,16 +69,13 @@ export default {
             'undo', 'redo'
         ],
       },
-      test: 'WOOYAH'
     }
   },
   methods: mapActions([
     'setCurrentPostContent'
   ]),
   mounted() {
-    console.log('!!! editor:')
     console.log(this.editor);
-    // this.editor.ui.view.height = '500px';
   }
 }
 

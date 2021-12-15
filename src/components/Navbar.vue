@@ -12,7 +12,7 @@
     <div class="navbar__right">
       <router-link
         class="navbar__item navbar__item--plain"
-        :class="$route.path === '/edit' ? 'hidden' : ''"
+        v-if="!($route.name === 'Edit' || $route.name === 'Post')"
         to="/edit"
       >
         <Button>
@@ -21,7 +21,7 @@
       </router-link>
       <div
         class="navbar__item"
-        :class="$route.path !== '/edit' ? 'hidden' : ''"
+        v-if="$route.name === 'Edit'"
       >
         <Button
           btnType="danger"
@@ -36,6 +36,23 @@
           Save
         </Button>
       </div>
+      <div
+        class="navbar__item"
+        v-if="$route.name === 'Post'"
+      >
+        <Button
+          btnType="danger"
+          :onClick="() => deletePost($route.params.id)"
+        >
+          Delete
+        </Button>
+        <Button
+          btnType="default"
+          :onClick="() => editPost($route.params.id)"
+        >
+          Edit
+        </Button>
+      </div>
     </div>
   </nav>
 </template>
@@ -45,6 +62,7 @@
     background-color: #fff;
     box-shadow: 0 0 5px $shadowMedium;
     display: flex;
+    font-family: $mainFont;
     height: $navbarHeight;
     justify-content: space-between;
     padding: 0 10px;
@@ -95,7 +113,9 @@ export default {
   },
   methods: mapActions([
     'cancelEdit',
-    'savePost'
+    'savePost',
+    'deletePost',
+    'editPost'
   ]),
 }
 </script>

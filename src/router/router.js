@@ -20,7 +20,8 @@ const routes = [
   },
   {
     path: '/edit',
-    component: Editor
+    component: Editor,
+    name: 'Edit'
   }
 ];
 

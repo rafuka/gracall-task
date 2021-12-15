@@ -1,17 +1,12 @@
 <template>
   <div class="dashboard">
-    <router-link
-      v-for="post in posts"
-      :to="{ name: 'Post', params: { id: post.id } }"
-      :key="post.id"
-      class="post-link"
-    >
       <PostPreview
+        v-for="post in posts"
         :post="post"
-        :onDelete="() => deletePost(post)"
-        :onEdit="() => editPost(post)"
+        :onDelete="() => deletePost(post.id)"
+        :onEdit="() => editPost(post.id)"
+        :key="post.id"
       />
-    </router-link>
   </div>
 </template>
 
@@ -20,11 +15,6 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-  }
-
-  .post-link {
-    text-decoration: none;
-    color: initial;
   }
 </style>
 
